@@ -68,7 +68,7 @@ describe('LPPCampaign test', function() {
     const codeHash = web3.utils.keccak256(LPPCampaignRuntimeByteCode);
     await liquidPledging.addValidPlugin(codeHash);
 
-    factory = await LPPCampaignFactory.new(web3, accounts[0], accounts[1], {gas: 6500000});
+    factory = await LPPCampaignFactory.new(web3, accounts[0], accounts[1], {gas: 6500000}).on('receipt', console.log);
     await factory.deploy(liquidPledging.$address, 'Campaign 1', 'URL1', 0, reviewer1, 'Campaign 1 Token', 'CPG', accounts[0], accounts[1], {from: campaignOwner1}); // pledgeAdmin #1
 
     const lpState = await liquidPledgingState.getState();
